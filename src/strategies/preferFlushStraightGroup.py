@@ -1,5 +1,4 @@
-
-from . import strategyHelpers
+from ..library import strategyHelpers
 
 
 def choose(board, card, turn):
