@@ -1,2 +1,14 @@
 Army Poker Sim
 ==============
+
+In the army in 2023, we played a game that we (incorrectly) call "_Chinese Poker_".
+
+During those games, several questions arose. This project aims to anser those questions, by simulating larget numbers of random games.
+
+Questions
+---------
+
+1. How much does luck play a factor? (vs ideal strategy)
+2. Is it better to focus on grouping, or flush/straight?
+3. Is a _flush_ unfairly weighted?
+
