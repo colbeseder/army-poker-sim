@@ -34,3 +34,16 @@ This remains an open question
 Raw Results
 -----------
 [Jupyter Notebook](tournament.ipynb)
+
+Next Steps
+----------
+
+We should create more advanced strategies, that:
+
+1. Consider the opponent's board state
+2. account for which cards remain in the deck
+3. make use of the final "swap" stage
+
+Adding new strategies is easy. At a file to the _src/strategies_ directory, that includes a "choose" function.
+
+Then run the _tournament_ notebook to see how it compares.
