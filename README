@@ -12,3 +12,21 @@ Questions
 2. Is it better to focus on grouping, or flush/straight?
 3. Is a _flush_ unfairly weighted?
 
+Answers (preliminary)
+---------------------
+
+    1. How much does luck play a factor?
+
+We see that the current top strategy _preferGroupFlushStraight_ beats _chooseLeft_ (basically random) 93% of the time. So strategy clearly matters.
+
+But once we exclude strategyless players, we see that the best score is only 63% (_preferGroupFlushStraight_ vs _preferStraightFlushGroup_). So even a better player will still lose roughly one third of all games, to a reasonably competent opponent.
+
+    2. Is it better to focus on grouping, or flush/straight?
+
+At this stage, it seems that prioritising groupings (eg. pairs, three of a kind, etc) is a better strategy. Even players who completely ignore opportunities for flush or straight beat _preferFlushStraightGroup_
+
+This may change as more advanced strtegies take more notice of which cards are still in the deck.
+
+    3. Is a _flush_ unfairly weighted?
+
+This remains an open question
