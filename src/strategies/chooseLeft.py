@@ -1,5 +1,7 @@
-import math
+from . import strategyHelpers
+
 
 def choose(board, card, turn):
-    choice = math.floor(turn / 2) % 5
-    return choice
+    myOptions = strategyHelpers.getMyOptions(board, turn)
+    myCols = board.state[strategyHelpers.getPlayerNumberFromTurn(turn)]
+    return strategyHelpers.chooseByPriority(card, myOptions, myCols, [])
