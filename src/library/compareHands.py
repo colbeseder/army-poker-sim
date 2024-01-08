@@ -1,4 +1,4 @@
-""" Project 54 complete. Result: 376 """
+""" This is old code written by Bryan in 2012 for Project Euler, challenge 54 """
 
 import re
 
