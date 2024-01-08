@@ -1,2 +1,2 @@
 *.pyc
-src/strategies/__pycache__/preferGroups.cpython-311.pyc
+*.DS_Store
