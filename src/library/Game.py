@@ -39,12 +39,23 @@ class Board():
     def add(self, player, column, card): # player 0 or 1
         if player not in [0, 1]:
             raise Exception("invalid player %s" %[player])
-        if column not in range(5):
-            raise Exception("invalid column %s" %[column])
+
         minimum_length = min([len(col) for col in self.state[player]])
-        if len(self.state[player][column]) > minimum_length:
-            raise Exception("Can't add card to column %s as it's not the shortest" % [column])
-        self.state[player][column].append(card)
+
+        if minimum_length == 5: # Swap round
+            if column == -1: # No swap
+                return
+            self.state[player][column][-1] = card
+
+        else: # Normal round
+            if column == -1:
+                raise Exception("Column -1, but it is not the swap round!")
+            if column not in range(5):
+                raise Exception("invalid column %s" %[column])
+            if len(self.state[player][column]) > minimum_length:
+                raise Exception("Can't add card to column %s as it's not the shortest" % [column])
+
+            self.state[player][column].append(card)
 
 
     def swap(self, player, column, card):
@@ -71,7 +82,7 @@ class Game():
     def __init__(self, strat1, strat2) -> None:
         self._deck = Deck()
         self._board = Board()
-        for turn in range(0, 50, 2): #TODO - Swapping round
+        for turn in range(0, 52, 2):
             cardA = self._deck.next()
             colA = strat1.choose(self._board.getSanitizedState(0), cardA, turn)
             self._board.add(0, colA, cardA)
@@ -79,5 +90,4 @@ class Game():
             cardB = self._deck.next()
             colB = strat2.choose(self._board.getSanitizedState(1), cardB, turn+1)
             self._board.add(1, colB, cardB)
-
-        self.result = self._board.getResult()    
+        self.result = self._board.getResult()
