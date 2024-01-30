@@ -59,7 +59,8 @@ class Board():
 
 
     def swap(self, player, column, card):
-        self.state[player][column][-1] = card
+        if column != -1:
+            self.state[player][column][-1] = card
 
     def getPreparedColsForCompare(self):
         pairs = []
@@ -82,7 +83,14 @@ class Game():
     def __init__(self, strat1, strat2) -> None:
         self._deck = Deck()
         self._board = Board()
-        for turn in range(0, 52, 2):
+
+        # Board layout
+        for col in range(0, 5):
+            self._board.add(0, col, self._deck.next())
+            self._board.add(1, col, self._deck.next())
+
+        # Regular Turns
+        for turn in range(10, 50, 2):
             cardA = self._deck.next()
             colA = strat1.choose(self._board.getSanitizedState(0), cardA, turn)
             self._board.add(0, colA, cardA)
@@ -90,4 +98,16 @@ class Game():
             cardB = self._deck.next()
             colB = strat2.choose(self._board.getSanitizedState(1), cardB, turn+1)
             self._board.add(1, colB, cardB)
+
+        # Swap Turn
+        cardA = self._deck.next()
+        colA = strat1.choose(self._board.getSanitizedState(0), cardA, 50)
+        self._board.swap(0, colA, cardA)
+
+        cardB = self._deck.next()
+        colB = strat2.choose(self._board.getSanitizedState(1), cardB, 51)
+        self._board.swap(1, colB, cardB)
+
+
+
         self.result = self._board.getResult()

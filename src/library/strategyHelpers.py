@@ -58,7 +58,7 @@ def chooseByPriority(card, myOptions, myCols, choiceFuncs):
     return myOptions[0]
 
 def isSwapRound(turn):
-    return turn > 50
+    return turn > 49
 
 def isSwapAnImprovement(col, card):
     return compareHands.getWinner(''.join(col), ''.join(col[:4] + [card])) == -1
