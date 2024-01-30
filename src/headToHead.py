@@ -4,13 +4,21 @@ from .library import Game
 
 def head2Head(strategy1, strategy2, iterations=1000):
     score = 0
-    for i in range(iterations):
+    for i in range(int(iterations/2)):
         game = Game.Game(strategy1, strategy2)
         result = game.result
         if result > 0:
             score += 1
         elif result < 0:
             score -= 1
+    # Swap player1 & Player2
+    for i in range(i, iterations):
+        game = Game.Game(strategy2, strategy1)
+        result = game.result
+        if result > 0:
+            score -= 1
+        elif result < 0:
+            score += 1
 
     return score
 
