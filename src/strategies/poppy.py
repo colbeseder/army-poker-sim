@@ -31,15 +31,15 @@ def chooseGroup(card, myOptions, myCols):
 
 def choose(boardState, card, turn):
     myCols = boardState[strategyHelpers.getPlayerNumberFromTurn(turn)]
-    if turn > 50: # Swap turn
+    if strategyHelpers.isSwapRound(turn):
         myOptions = []
         for i in range(5):
             col = myCols[i]
-            if compareHands.getWinner(''.join(col), ''.join(col[:4] + [card])) == -1:
+            if strategyHelpers.isSwapAnImprovement(col, card):
                 myOptions.append(i)
         if len(myOptions) == 0:
             return -1
         return strategyHelpers.chooseByPriority(card, myOptions, myCols, [chooseGroup, strategyHelpers.chooseFlush, strategyHelpers.chooseStraight])
-    
+
     myOptions = strategyHelpers.getMyOptions(boardState, turn)
     return strategyHelpers.chooseByPriority(card, myOptions, myCols, [chooseGroup, strategyHelpers.chooseFlush, strategyHelpers.chooseStraight])

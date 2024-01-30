@@ -1,3 +1,5 @@
+from ..library import compareHands
+
 def getPlayerNumberFromTurn(turn):
     return turn % 2
 
@@ -30,7 +32,7 @@ cardValOrder = "A23456789TJQKA"
 def getValIndex(a):
     return cardValOrder.index(a)
 
-
+# Will not look for gutshot straight
 def chooseStraight(card, myOptions, myCols):
     for opt in myOptions:
         cardValues = [readCard(c)["val"] for c in myCols[opt]]
@@ -54,3 +56,9 @@ def chooseByPriority(card, myOptions, myCols, choiceFuncs):
         if result is not False:
             return result
     return myOptions[0]
+
+def isSwapRound(turn):
+    return turn > 50
+
+def isSwapAnImprovement(col, card):
+    return compareHands.getWinner(''.join(col), ''.join(col[:4] + [card])) == -1
