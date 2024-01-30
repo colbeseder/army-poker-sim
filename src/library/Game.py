@@ -24,6 +24,18 @@ class Board():
             [[] for _ in range(5)]
         ]
 
+    # Hide last card in opponents columns
+    def getSanitizedState(self, player):
+        sanitizedState = [
+            [ar.copy() for ar in self.state[0]],
+            [ar.copy() for ar in self.state[1]]
+            ]
+        otherPlayer = (player + 1) % 2
+        for col in sanitizedState[otherPlayer]:
+            if len(col) == 5:
+                col[4] = "??"
+        return sanitizedState
+
     def add(self, player, column, card): # player 0 or 1
         if player not in [0, 1]:
             raise Exception("invalid player %s" %[player])
@@ -61,11 +73,11 @@ class Game():
         self._board = Board()
         for turn in range(0, 50, 2): #TODO - Swapping round
             cardA = self._deck.next()
-            colA = strat1.choose(self._board, cardA, turn)
+            colA = strat1.choose(self._board.getSanitizedState(0), cardA, turn)
             self._board.add(0, colA, cardA)
 
             cardB = self._deck.next()
-            colB = strat2.choose(self._board, cardB, turn+1)
+            colB = strat2.choose(self._board.getSanitizedState(1), cardB, turn+1)
             self._board.add(1, colB, cardB)
 
         self.result = self._board.getResult()    

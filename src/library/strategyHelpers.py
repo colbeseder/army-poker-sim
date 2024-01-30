@@ -9,8 +9,8 @@ def readCard(card):
     }
 
 
-def getMyOptions(board, turn):
-    myCols = board.state[getPlayerNumberFromTurn(turn)]
+def getMyOptions(boardState, turn):
+    myCols = boardState[getPlayerNumberFromTurn(turn)]
     minimumLength = min([len(col) for col in myCols])
     myOptions = []
     for i in range(5):
