@@ -34,7 +34,7 @@ def chooseGroup(card, myOptions, myCols):
     if len(filtered) == 0:
         return False
 
-    return filtered[-1][0]
+    return filtered[0][0]
 
 
 
