@@ -11,8 +11,9 @@ def head2Head(strategy1, strategy2, iterations=1000):
             score += 1
         elif result < 0:
             score -= 1
+        last = i
     # Swap player1 & Player2
-    for i in range(i, iterations):
+    for i in range(last+1, iterations):
         game = Game.Game(strategy2, strategy1)
         result = game.result
         if result > 0:
